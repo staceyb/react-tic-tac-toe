@@ -52,7 +52,9 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null)
+          squares: Array(9).fill(null),
+          row: null,
+          col: null
         }
       ],
       xIsNext: true,
@@ -67,12 +69,18 @@ class Game extends React.Component {
     if (this.calculateWinner(squares) || squares[i]) {
       return;
     }
+   
+    let row = Math.floor(i / 3) + 1;
+    let col = (i % 3) + 1;
+    console.log(i, i % 3);
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
     this.setState({
       history: history.concat([
         {
-          squares: squares
+          squares: squares,
+          row: row,
+          col: col
         }
       ]),
       xIsNext: !this.state.xIsNext,
@@ -87,12 +95,13 @@ class Game extends React.Component {
 
     const moves = history.map((step, moveNum) => {
       console.log({ step }, { moveNum });
-      const desc = moveNum ? 'Go to move #' + moveNum : 'Go to game start';
-      return (
-        <li key={moveNum}>
-          <button onClick={() => this.jumpTo(moveNum)}>{desc}</button>
-        </li>
-      );
+      const desc = moveNum ? `Go to move #${moveNum} Row:${step.row} Col:${step.col}` : 'Go to game start';
+      const currentStepClass = moveNum === this.state.stepNumber ? 'currentStep btn-underline' : 'btn-underline';
+      return <li key={moveNum}>
+          <button className={currentStepClass} onClick={() => this.jumpTo(moveNum)}>
+            {desc}
+          </button>
+        </li>;
     });
 
     let status;
@@ -107,7 +116,7 @@ class Game extends React.Component {
           <Board squares={current.squares} onClick={i => this.handleClick(i)} />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <span className="status">{status}</span>
           <ol>{moves}</ol>
         </div>
       </div>
