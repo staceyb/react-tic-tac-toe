@@ -8,7 +8,7 @@ body {
 ol,
 ul {
   padding-left: 0;
-  margin-top: .25rem;
+  margin: 0;
 }
 
 li {
@@ -32,8 +32,6 @@ li {
 }
 
 button {
-  padding: 5px;
-  margin: 5px;
   border: none;
   font-size: .75rem;
   font-weight: 300;
@@ -87,13 +85,14 @@ button {
   float: left;
   font-size: 36px;
   font-weight: bold;
-  line-height: 88px;
-  height: 88px;
+  line-height: 100px;
+  height: 100px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 88px;
+  width: 100px;
+  align-self: flex-start;
 }
 
 .square:focus {
@@ -107,8 +106,18 @@ button {
 .game {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
 }
 
 .game-info {
   margin-left: 20px;
+}
+
+.game-board {
+  margin-top: 20px;
+  width: 300px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
