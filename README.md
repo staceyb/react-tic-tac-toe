@@ -5,6 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This is a classic game, Tic Tac Toe, built using React. It
 keeps track of the history of moves and let's the player(s) time travel backwards and forwards through the moves. The game can be cleared and restarted.
 
+Demo can be found [here https://staceyb.github.io/react-tic-tac-toe/](https://staceyb.github.io/react-tic-tac-toe/)
+
 The coding challenges added included:
 1) Printing out the row and column of a move
 2) Highlighting the current move
