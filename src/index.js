@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const Square = props => {
-    return (
-      <button className="square" 
+  let classDesc = 'square';
+
+  if (props.winningInfo && props.winningInfo.includes(props.index)) {
+    classDesc = "square winner"
+  }
+
+  return (
+      <button className={classDesc} 
       onClick={props.onClick}>
         {props.value}
       </button>
-    )
+  )
 }
 
 class Board extends React.Component {
@@ -16,8 +22,10 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square key={i}
+        index={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
+        winningInfo={this.props.winningInfo}
       />
     );
   }
@@ -91,9 +99,9 @@ class Game extends React.Component {
     const winningInfo = this.calculateWinner(current.squares);
 
     const moves = history.map((step, moveNum) => {
-      const desc = moveNum ? `Go to move #${moveNum} Row:${step.row} Col:${step.col}` : 'Go to game start';
-      const currentStepClass = moveNum === this.state.stepNumber ? 'currentStep btn-underline' : 'btn-underline';
-      return <li key={moveNum}>
+    const desc = moveNum ? `Go to move #${moveNum} Row:${step.row} Col:${step.col}` : 'Go to game start';
+    const currentStepClass = moveNum === this.state.stepNumber ? 'currentStep btn-underline' : 'btn-underline';
+    return <li key={moveNum}>
           <button className={currentStepClass} onClick={() => this.jumpTo(moveNum)}>
             {desc}
           </button>
@@ -111,7 +119,7 @@ class Game extends React.Component {
     }
     return <div className="game">
         <div className="game-board">
-          <Board squares={current.squares} onClick={i => this.handleClick(i)} />
+          <Board squares={current.squares} winningInfo={winningInfo.winningMoves} onClick={i => this.handleClick(i)} />
         </div>
         <div className="game-info">
           <button className="restart" onClick={() => this.restartGame()}>
@@ -131,7 +139,7 @@ class Game extends React.Component {
   }
 
   calculateWinner(squares) {
-    const winningmoves = [
+    const winningMoves = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -141,20 +149,20 @@ class Game extends React.Component {
       [0, 4, 8],
       [2, 4, 6]
     ];
-    for (let i = 0; i < winningmoves.length; i++) {
-      const [a, b, c] = winningmoves[i];
+    for (let i = 0; i < winningMoves.length; i++) {
+      const [a, b, c] = winningMoves[i];
       if (
         squares[a] &&
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
         return {
-                winningmoves: winningmoves[i],
+                winningMoves: winningMoves[i],
                 winner: squares[a]
               };
       }
     }
-    return {winningmoves: null, winner: null};
+    return {winningMoves: null, winner: null};
   }
 }
 

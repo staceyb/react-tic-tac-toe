@@ -105,6 +105,24 @@ button {
   align-self: flex-start;
 }
 
+.square.winner {
+  animation: 1s infinite pulse;
+  background : #2098D1;
+  color: white;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
 .square:focus {
   outline: none;
