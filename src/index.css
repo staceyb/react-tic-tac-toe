@@ -1,5 +1,9 @@
 body {
-  font: 20px Futura, sans-serif;
+  font: 20px 'Helvetica Neue',
+  Helvetica,
+  Arial,
+  sans-serif;
+  ;
   margin: 20px;
   font-weight: 300;
   color: gray;
@@ -14,12 +18,6 @@ ul {
 li {
   vertical-align: middle;
   list-style: none;
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
 }
 
 .status {
@@ -38,7 +36,11 @@ button {
   color: #2098D1;
   background: white;
   display: inline-block;
+  padding: 2px 6px 3px;
   vertical-align: middle;
+ -webkit-text-rendering: optimizeLegibility;
+ -moz-text-rendering: optimizeLegibility;
+ text-rendering: optimizeLegibility;
 }
 
 .btn-underline {
@@ -75,8 +77,16 @@ button {
   transform: translateY(0);
 }
 
+.restart {
+  display: block;
+  padding: 5px;
+  color: white;
+  background:goldenrod;
+  margin-bottom: 15px;
+}
+
 .status {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .square {
@@ -94,6 +104,7 @@ button {
   width: 100px;
   align-self: flex-start;
 }
+
 
 .square:focus {
   outline: none;
@@ -114,7 +125,7 @@ button {
 }
 
 .game-board {
-  margin-top: 20px;
+  margin-top: 2px;
   width: 300px;
   display: flex;
   flex-flow: row wrap;
