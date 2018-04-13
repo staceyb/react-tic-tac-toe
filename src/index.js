@@ -99,7 +99,7 @@ class Game extends React.Component {
     const winningInfo = this.calculateWinner(current.squares);
 
     const moves = history.map((step, moveNum) => {
-    const desc = moveNum ? `Go to move #${moveNum} Row:${step.row} Col:${step.col}` : 'Go to game start';
+    const desc = moveNum ? `Go to move #${moveNum} Row:${step.row} Col:${step.col}` : 'Go to game beginning';
     const currentStepClass = moveNum === this.state.stepNumber ? 'currentStep btn-underline' : 'btn-underline';
     return <li key={moveNum}>
           <button className={currentStepClass} onClick={() => this.jumpTo(moveNum)}>
@@ -115,17 +115,17 @@ class Game extends React.Component {
     } else if (!winner && this.state.history.length === 10) {
       status = 'The game is a draw: there is no winner';
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = 'Current player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
     return <div className="game">
         <div className="game-board">
           <Board squares={current.squares} winningInfo={winningInfo.winningMoves} onClick={i => this.handleClick(i)} />
+          <span className="status">{status}</span>
         </div>
         <div className="game-info">
           <button className="restart" onClick={() => this.restartGame()}>
             Restart Game
           </button>
-          <span className="status">{status}</span>
           <ol>{moves}</ol>
         </div>
       </div>;

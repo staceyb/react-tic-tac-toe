@@ -86,7 +86,8 @@ button {
 }
 
 .status {
-  margin-bottom: 15px;
+  margin: 15px 0;
+  font-weight: 700;
 }
 
 .square {
